@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Board} from "../engine/board";
 
 
 @Component({
@@ -8,6 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BoardComponent implements OnInit {
   //@Input() boardSize: number =10;
+  @Input() board: Board =new Board(10,10);
   _fields:Array<any>=[
     [{},{},{},{},{},{},{},{},{},{}],
     [{},{},{},{},{},{},{},{},{},{}],
