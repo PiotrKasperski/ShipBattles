@@ -1,0 +1,19 @@
+<form>
+  <label>Palyer1: <input [(ngModel)]="settings.player1.name" [ngModelOptions]="{standalone: true}" type="text"></label>
+  <br>
+  <label>Palyer2: <input [(ngModel)]="settings.player2.name" [ngModelOptions]="{standalone: true}" type="text"></label>
+  <br>
+  <label>Board: <br>
+    <label>width <input [(ngModel)]="settings.board.width" [ngModelOptions]="{standalone: true}" type="number"></label>
+    <br>
+    <label>high <input [(ngModel)]="settings.board.high" [ngModelOptions]="{standalone: true}" type="number"></label>
+  </label>
+  <!--  <br>
+    <label>Ships:
+    <label>
+      <input type="number" ngModel name="ships">
+    </label>
+    </label>-->
+  <br>
+  <button (click)="onSubmit(settings)">Start Game</button>
+</form>

@@ -12,22 +12,14 @@ import {Player} from "./player";
 import {FieldState} from "./field-state";
 import {Position} from "./position";
 import {Ship} from "./ship";
-import {Directions} from "./directions";
+import {GameSettings} from "./game-settings";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  currentPlayer: Player = new Player('p1', {width: 5, high: 5}, [{
-    size: 2,
-    position: {x: 2, y: 2},
-    directions: Directions.VERTICAL
-  }]);
-  _waitingPlayer: Player = new Player('p2', {width: 10, high: 10}, [{
-    size: 4,
-    position: {x: 3, y: 5},
-    directions: Directions.HORIZONTAl
-  }]);
+  currentPlayer: Player = new Player();
+  _waitingPlayer: Player = new Player();
 
   private _winner: Player = new Player();
   _roundTime: number = 10000
@@ -37,7 +29,9 @@ export class GameService {
   }
 
   constructor() {
+
   }
+
 
   hit({x, y}: Position): void {
     if (this.checkMovementPossibility({x, y})) {
@@ -108,5 +102,14 @@ export class GameService {
 
   onGameOver() {
     this._winner = this.currentPlayer;
+  }
+
+  init(settings: GameSettings) {
+
+    this.currentPlayer = new Player(settings.player1.name, settings.board, settings.ships);
+    this._waitingPlayer = new Player(settings.player2.name, settings.board, settings.ships);
+    console.log('initialization', this.currentPlayer, settings);
+
+
   }
 }

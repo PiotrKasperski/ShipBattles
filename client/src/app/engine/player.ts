@@ -10,21 +10,11 @@ export class Player {
     width: 0,
     high: 0
   }, ships: Array<{ size: number, position: Position, directions: Directions }> = []) {
+
     this._name = name;
     this._board = new Board(board.width, board.high);
     this._ships = this.setShips(ships);
     this._canMove = true;
-
-    //MOCKS TODO refactor
-    this._board = new Board(10, 10);
-
-    // this._ships.push(new Ship(4));
-    // this._ships.push(new Ship(3));
-    // this._ships.push(new Ship(3));
-    //
-    // this._ships[0].setShipPosition({x: 1, y: 6}, Directions.VERTICAL);
-    // this._ships[1].setShipPosition({x: 2, y: 4}, Directions.HORIZONTAl);
-    // this._ships[2].setShipPosition({x: 8, y: 2}, Directions.VERTICAL);
 
     this.deployShips();
   }

@@ -1,11 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MenuComponent} from './menu.component';
+import {Router} from "@angular/router";
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
-
+  beforeEach(() => {
+    const routerMock = {};
+    TestBed.configureTestingModule({providers: [{provide: Router, useValue: routerMock}]})
+  })
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MenuComponent]

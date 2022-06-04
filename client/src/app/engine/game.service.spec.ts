@@ -4,14 +4,21 @@ import {GameService} from './game.service';
 import {FieldState} from "./field-state";
 import {Player} from "./player";
 import {Directions} from "./directions";
+import {Router} from "@angular/router";
+import {GameSettings} from "./game-settings";
 
 describe('GameService', () => {
   let service: GameService;
   let waitingPlayer: Player;
   let currentPlayer: Player;
+  const router = Router;
+  let settings: GameSettings;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    const routerMock = {};
+    TestBed.configureTestingModule({providers: [{provide: Router, useValue: routerMock}]})
+  })
+  beforeEach(() => {
     service = TestBed.inject(GameService);
     service._waitingPlayer = new Player('p1', {width: 5, high: 5}, [{
       size: 2,
@@ -26,6 +33,7 @@ describe('GameService', () => {
     waitingPlayer = service._waitingPlayer;
     currentPlayer = service.currentPlayer;
   });
+
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -106,5 +114,62 @@ describe('GameService', () => {
     expect(service.winner).toEqual(currentPlayer);
 
   });
+  beforeEach(() => {
+    settings = {
+      "board": {
+        "high": 7,
+        "width": 7
+      },
+      "player1": {
+        "name": "p1"
+      },
+      "player2": {
+        "name": "p2"
+      },
+      "ships": [
+        {
+          "size": 2,
+          "position": {
+            "x": 5,
+            "y": 0
+          },
+          "directions": 0
+        }
+      ]
+    };
+  })
+  it('should init new players', function () {
+    service.init(settings);
+    expect(service.currentPlayer.name).toEqual(settings.player1.name);
+    expect(service._waitingPlayer.name).toEqual(settings.player2.name);
 
+
+  });
+  it('should create boards', function () {
+    service.init(settings);
+    console.log(service.currentPlayer);
+    expect(service.currentPlayer.board.fields.length).toEqual(settings.board.high);
+    expect(service._waitingPlayer.board.fields.length).toEqual(settings.board.high);
+    expect(service.currentPlayer.board.fields[0].length).toEqual(settings.board.width);
+    expect(service._waitingPlayer.board.fields[0].length).toEqual(settings.board.width);
+  });
+  it('should create ships', function () {
+    service.init(settings);
+    expect(service.currentPlayer.ships.length).toEqual(settings.ships.length);
+    expect(service._waitingPlayer.ships.length).toEqual(settings.ships.length);
+  });
+  it('should create ship on proper position', function () {
+    service.init(settings);
+    expect(service.currentPlayer.ships[0].positions[0].x).toEqual(settings.ships[0].position.x);
+    expect(service._waitingPlayer.ships[0].positions[0].x).toEqual(settings.ships[0].position.x);
+    expect(service.currentPlayer.ships[0].positions[0].y).toEqual(settings.ships[0].position.y);
+    expect(service._waitingPlayer.ships[0].positions[0].y).toEqual(settings.ships[0].position.y);
+  });
+  it('should create ships in proper orientatin', function () {
+    service.init(settings);
+    expect(service.currentPlayer.ships[0].positions[1].x).toEqual(settings.ships[0].position.x);
+    expect(service._waitingPlayer.ships[0].positions[1].x).toEqual(settings.ships[0].position.x);
+    expect(service.currentPlayer.ships[0].positions[1].y).toEqual(settings.ships[0].position.y + 1);
+    expect(service._waitingPlayer.ships[0].positions[1].y).toEqual(settings.ships[0].position.y + 1);
+  });
 });
