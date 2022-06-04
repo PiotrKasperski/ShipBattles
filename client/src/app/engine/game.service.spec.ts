@@ -89,5 +89,22 @@ describe('GameService', () => {
       }
     }
   });
+  it('should return true when player lost all ships', function () {
+    expect(service.isGameOver()).toBeFalsy();
+    let hitPosition1 = {x: 2, y: 2}
+    let hitPosition2 = {x: 3, y: 2}
+    service.onShipHit(hitPosition1);
+    service.onShipHit(hitPosition2);
+    expect(service.isGameOver()).toBeTruthy();
+  });
+  it('should end game', function () {
+    let hitPosition1 = {x: 2, y: 2}
+    let hitPosition2 = {x: 3, y: 2}
+    service.onShipHit(hitPosition1);
+    service.onShipHit(hitPosition2);
+    service.onGameOver();
+    expect(service.winner).toEqual(currentPlayer);
+
+  });
 
 });

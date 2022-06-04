@@ -46,7 +46,6 @@ export class Board {
     for (const fields of this._fields) {
       for (const field of fields) {
         if (field.position.y === x && field.position.x === y) {
-          console.log(field)
           return field
         }
       }

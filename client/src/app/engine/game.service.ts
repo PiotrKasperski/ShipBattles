@@ -18,17 +18,23 @@ import {Directions} from "./directions";
   providedIn: 'root'
 })
 export class GameService {
-  currentPlayer: Player = new Player('p1', {width: 10, high: 10}, [{
+  currentPlayer: Player = new Player('p1', {width: 5, high: 5}, [{
+    size: 2,
+    position: {x: 2, y: 2},
+    directions: Directions.VERTICAL
+  }]);
+  _waitingPlayer: Player = new Player('p2', {width: 10, high: 10}, [{
     size: 4,
     position: {x: 3, y: 5},
     directions: Directions.HORIZONTAl
   }]);
-  _waitingPlayer: Player = new Player('p1', {width: 10, high: 10}, [{
-    size: 4,
-    position: {x: 3, y: 5},
-    directions: Directions.HORIZONTAl
-  }]);
+
+  private _winner: Player = new Player();
   _roundTime: number = 10000
+
+  get winner(): Player {
+    return this._winner;
+  }
 
   constructor() {
   }
@@ -38,7 +44,12 @@ export class GameService {
       if (this._waitingPlayer.board.fields[y][x].state === FieldState.SHIP) this.onShipHit({x, y});
       if (this._waitingPlayer.board.fields[y][x].state === FieldState.EMPTY) this.onFieldHit({x, y});
       this.currentPlayer.canMove = false;
-      setTimeout(() => this.nextPlayer(), 500);
+      if (!this.isGameOver()) {
+        setTimeout(() => this.nextPlayer(), 500);
+      } else {
+        this.onGameOver()
+      }
+
     }
   }
 
@@ -49,7 +60,7 @@ export class GameService {
         if (this.isShipSink(ship)) {
           this.onShipSink(ship);
         }
-        console.log('is sink', this.isShipSink(ship), this._waitingPlayer.board.getFields(ship.positions))
+
       }
     }
 
@@ -85,5 +96,17 @@ export class GameService {
     this.currentPlayer = this._waitingPlayer;
     this.currentPlayer.canMove = true;
     this._waitingPlayer = tmp;
+  }
+
+  isGameOver() {
+    console.log(this._waitingPlayer);
+    return this._waitingPlayer.ships.every(ship => {
+      console.log('evry', this.isShipSink(ship), ship)
+      return this.isShipSink(ship)
+    });
+  }
+
+  onGameOver() {
+    this._winner = this.currentPlayer;
   }
 }
