@@ -5,6 +5,7 @@ import {FieldComponent} from "./field/field.component";
 import {MenuComponent} from "./menu/menu.component";
 import {SettingComponent} from "./setting/setting.component";
 import {GameComponent} from './game/game.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {GameComponent} from './game/game.component';
     SettingComponent,
     GameComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class InterfaceModule {

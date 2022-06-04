@@ -39,6 +39,7 @@ export class GameService {
   constructor() {
   }
 
+
   hit({x, y}: Position): void {
     if (this.checkMovementPossibility({x, y})) {
       if (this._waitingPlayer.board.fields[y][x].state === FieldState.SHIP) this.onShipHit({x, y});
