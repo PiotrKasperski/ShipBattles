@@ -1,5 +1,6 @@
 <form>
   <label>Palyer1: <input [(ngModel)]="settings.player1.name" [ngModelOptions]="{standalone: true}" type="text"></label>
+  <br>
   <label>Palyer2: <input [(ngModel)]="settings.player2.name" [ngModelOptions]="{standalone: true}" type="text"></label>
   <br>
   <label>Board: <br>
@@ -13,5 +14,6 @@
       <input type="number" ngModel name="ships">
     </label>
     </label>-->
-  <button (click)="onSubmit(settings)">Start</button>
+  <br>
+  <button (click)="onSubmit(settings)">Start Game</button>
 </form>

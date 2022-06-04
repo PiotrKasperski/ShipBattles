@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GameSettings} from "../../engine/game-settings";
 import {Directions} from "../../engine/directions";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-setting',
@@ -11,7 +12,7 @@ export class SettingComponent implements OnInit {
 
   settings: GameSettings = {board: {high: 0, width: 0}, player1: {name: ""}, player2: {name: ""}, ships: []}
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class SettingComponent implements OnInit {
       {size: 2, position: {x: 3, y: 0}, directions: Directions.VERTICAL},
       {size: 2, position: {x: 4, y: 0}, directions: Directions.VERTICAL},
       {size: 2, position: {x: 5, y: 0}, directions: Directions.VERTICAL});
+    this.router.navigateByUrl('/game', {state: settings})
     console.log(settings);
   }
 
