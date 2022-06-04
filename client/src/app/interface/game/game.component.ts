@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../engine/game.service";
 import {Router} from '@angular/router';
 import {GameSettings} from "../../engine/game-settings";
+import {GameStates} from "../../engine/game-states";
 
 @Component({
   selector: 'app-game',
@@ -18,6 +19,9 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.settings = {...this.settings, ...history.state};
     this.gameService.init(this.settings);
+    this.gameService.gameState.subscribe(gameState => {
+      if (gameState === GameStates.GAME_OVER) this.router.navigateByUrl('/gameover', {state: {player: this.gameService.winner}})
+    })
   }
 
 }

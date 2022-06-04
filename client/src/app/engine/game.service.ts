@@ -13,23 +13,31 @@ import {FieldState} from "./field-state";
 import {Position} from "./position";
 import {Ship} from "./ship";
 import {GameSettings} from "./game-settings";
+import {GameStates} from "./game-states";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
+  constructor() {
+    this._gameState.next(GameStates.INITIALIZATION)
+  }
+
   currentPlayer: Player = new Player();
   _waitingPlayer: Player = new Player();
 
   private _winner: Player = new Player();
+
+  private _gameState: Subject<GameStates> = new Subject<GameStates>();
   _roundTime: number = 10000
 
   get winner(): Player {
     return this._winner;
   }
 
-  constructor() {
-
+  get gameState(): Subject<GameStates> {
+    return this._gameState;
   }
 
 
@@ -93,15 +101,12 @@ export class GameService {
   }
 
   isGameOver() {
-    console.log(this._waitingPlayer);
-    return this._waitingPlayer.ships.every(ship => {
-      console.log('evry', this.isShipSink(ship), ship)
-      return this.isShipSink(ship)
-    });
+    return this._waitingPlayer.ships.every(ship => this.isShipSink(ship));
   }
 
   onGameOver() {
     this._winner = this.currentPlayer;
+    this._gameState.next(GameStates.GAME_OVER);
   }
 
   init(settings: GameSettings) {

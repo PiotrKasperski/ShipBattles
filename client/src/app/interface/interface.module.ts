@@ -7,6 +7,8 @@ import {SettingComponent} from "./setting/setting.component";
 import {GameComponent} from './game/game.component';
 import {FormsModule} from "@angular/forms";
 
+import {GameOverComponent} from './game-over/game-over.component';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import {FormsModule} from "@angular/forms";
     FieldComponent,
     MenuComponent,
     SettingComponent,
-    GameComponent],
+    GameComponent,
+    GameOverComponent],
   imports: [
     CommonModule,
     FormsModule
