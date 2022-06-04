@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Board} from "../engine/board";
+import {Board} from "../../engine/board";
 
 
 @Component({

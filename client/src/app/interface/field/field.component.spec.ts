@@ -1,8 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FieldComponent} from './field.component';
-import {FieldState} from "../engine/field-state";
-import {GameService} from "../engine/game.service";
+import {FieldState} from "../../engine/field-state";
+import {GameService} from "../../engine/game.service";
 
 
 describe('FieldComponent', () => {

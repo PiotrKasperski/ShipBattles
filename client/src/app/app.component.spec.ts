@@ -1,5 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -28,8 +28,8 @@ describe('AppComponent', () => {
   //   const compiled = fixture.nativeElement as HTMLElement;
   //   expect(compiled.querySelector('.content span')?.textContent).toContain('client app is running!');
   // });
-  it('should start the game', ()=>{
-
-    expect()
-  })
+  // it('should start the game', ()=>{
+  //
+  //   expect()
+  // })
 });
