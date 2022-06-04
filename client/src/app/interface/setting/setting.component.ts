@@ -20,12 +20,13 @@ export class SettingComponent implements OnInit {
 
   onSubmit(settings: GameSettings) {
 
-    settings.ships.push({size: 4, position: {x: 0, y: 0}, directions: Directions.VERTICAL},
-      {size: 3, position: {x: 2, y: 0}, directions: Directions.VERTICAL},
-      {size: 3, position: {x: 1, y: 0}, directions: Directions.VERTICAL},
-      {size: 2, position: {x: 3, y: 0}, directions: Directions.VERTICAL},
-      {size: 2, position: {x: 4, y: 0}, directions: Directions.VERTICAL},
-      {size: 2, position: {x: 5, y: 0}, directions: Directions.VERTICAL});
+    settings.ships.push({size: 4, position: {x: 2, y: 2}, directions: Directions.VERTICAL},
+      // {size: 3, position: {x: 2, y: 0}, directions: Directions.VERTICAL},
+      // {size: 3, position: {x: 1, y: 0}, directions: Directions.VERTICAL},
+      // {size: 2, position: {x: 3, y: 0}, directions: Directions.VERTICAL},
+      // {size: 2, position: {x: 4, y: 0}, directions: Directions.VERTICAL},
+      // {size: 2, position: {x: 5, y: 0}, directions: Directions.VERTICAL}
+    );
     this.router.navigateByUrl('/game', {state: settings})
     console.log(settings);
   }

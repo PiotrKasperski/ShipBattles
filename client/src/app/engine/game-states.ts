@@ -1,0 +1,8 @@
+export enum GameStates {
+  INITIALIZATION,
+  DEPLOYING,
+  PLAYER_TURN,
+  ENEMY_TURN,
+  SUSPEND,
+  GAME_OVER
+}
