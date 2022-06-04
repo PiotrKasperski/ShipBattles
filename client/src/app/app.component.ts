@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {GameService} from "./engine/game.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,8 @@ import {GameService} from "./engine/game.service";
 })
 export class AppComponent {
   title = 'client';
-  constructor(public gameService: GameService) {
+
+  constructor() {
   }
 
 }

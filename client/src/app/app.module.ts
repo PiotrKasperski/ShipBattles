@@ -2,19 +2,21 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {BoardComponent} from './board/board.component';
-import {FieldComponent} from './field/field.component';
+
 import {EngineModule} from "./engine/engine.module";
+
+import {AppRoutingModule} from './app-routing.module';
+import {InterfaceModule} from "./interface/interface.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoardComponent,
-    FieldComponent
   ],
   imports: [
     BrowserModule,
     EngineModule.forRoot(),
+    InterfaceModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
