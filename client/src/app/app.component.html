@@ -1,2 +1,2 @@
-PLAYER1 vs PLAYER2
-<app-board [board]="gameService.currentPlayer.board"></app-board>
+{{gameService.currentPlayer.name}}
+<app-board [board]="gameService._waitingPlayer.board"></app-board>

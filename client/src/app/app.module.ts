@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { BoardComponent } from './board/board.component';
-import { FieldComponent } from './field/field.component';
+import {AppComponent} from './app.component';
+import {BoardComponent} from './board/board.component';
+import {FieldComponent} from './field/field.component';
+import {EngineModule} from "./engine/engine.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { FieldComponent } from './field/field.component';
     FieldComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    EngineModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
