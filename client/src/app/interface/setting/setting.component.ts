@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class SettingComponent implements OnInit {
 
-  settings: GameSettings = {board: {high: 0, width: 0}, player1: {name: ""}, player2: {name: ""}, ships: []}
+  settings: GameSettings = {board: {high: 10, width: 10}, player1: {name: "p1"}, player2: {name: "p2"}, ships: []}
 
   constructor(private router: Router) {
   }
@@ -20,7 +20,7 @@ export class SettingComponent implements OnInit {
 
   onSubmit(settings: GameSettings) {
 
-    settings.ships.push({size: 4, position: {x: 2, y: 2}, directions: Directions.VERTICAL},
+    settings.ships.push({size: 2, position: {x: 0, y: 0}, directions: Directions.VERTICAL},
       // {size: 3, position: {x: 2, y: 0}, directions: Directions.VERTICAL},
       // {size: 3, position: {x: 1, y: 0}, directions: Directions.VERTICAL},
       // {size: 2, position: {x: 3, y: 0}, directions: Directions.VERTICAL},
