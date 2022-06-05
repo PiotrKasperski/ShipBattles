@@ -1,3 +1,6 @@
-<div *ngFor="let row of board.fields" class="row">
-  <app-field *ngFor="let field of row" [field]="field" class="field"></app-field>
+<div class="board">
+  <div *ngFor="let row of board.fields" class="row">
+    <app-field *ngFor="let field of row" [field]="field" class="field"></app-field>
+  </div>
+  <app-drag-board></app-drag-board>
 </div>

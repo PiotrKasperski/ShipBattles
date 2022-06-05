@@ -1,0 +1,9 @@
+<div #dragboard class="drag-board">
+  <div class="ship-storage">
+    <div (cdkDragMoved)="onDragMoved($event, ship)" *ngFor=" let ship of ships" cdkDrag cdkDragBoundary=".drag-board"
+         class="ship-drag">
+      <app-ship></app-ship>
+    </div>
+  </div>
+</div>
+

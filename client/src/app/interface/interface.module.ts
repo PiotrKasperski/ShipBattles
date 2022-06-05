@@ -9,6 +9,10 @@ import {FormsModule} from "@angular/forms";
 
 import {GameOverComponent} from './game-over/game-over.component';
 
+import {DragBoardComponent} from './drag-board/drag-board.component';
+import {ShipComponent} from './ship/ship.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+
 
 @NgModule({
   declarations: [
@@ -17,10 +21,17 @@ import {GameOverComponent} from './game-over/game-over.component';
     MenuComponent,
     SettingComponent,
     GameComponent,
-    GameOverComponent],
+    GameOverComponent,
+    DragBoardComponent,
+    ShipComponent],
+  exports: [
+    BoardComponent,
+    GameComponent
+  ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ]
 })
 export class InterfaceModule {

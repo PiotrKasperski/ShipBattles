@@ -11,7 +11,6 @@ const routes: Routes = [
   {path: 'gameover', component: GameOverComponent},
   {path: 'game', component: GameComponent, data: {settings: {}}},
 
-
   {path: '', redirectTo: '/menu', pathMatch: 'full'},
 
 ];

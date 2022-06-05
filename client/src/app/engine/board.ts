@@ -4,7 +4,12 @@ import {FieldState} from "./field-state";
 import {Position} from "./position";
 
 export class Board {
+  width: number;
+  height: number;
+
   constructor(width: number, high: number) {
+    this.width = width;
+    this.height = high;
     this._fields = [];
     for (let j = 0; j < high; j++) {
       let row: Array<Field> = [];
@@ -27,6 +32,10 @@ export class Board {
 
   deployShip(ship: Ship) {
     for (const shipPosition of ship.positions) {
+      if (shipPosition.x >= this.width) shipPosition.x = this.width - 1;
+      if (shipPosition.y >= this.height) shipPosition.y = this.height - 1;
+      //TODO x<=width
+      console.log(shipPosition.x, shipPosition.y)
       this._fields[shipPosition.x][shipPosition.y].state = FieldState.SHIP;
     }
   }
@@ -52,5 +61,13 @@ export class Board {
     }
     return _field;
 
+  }
+
+  clear() {
+    for (const row of this._fields) {
+      for (const field of row) {
+        field.state = FieldState.EMPTY;
+      }
+    }
   }
 }

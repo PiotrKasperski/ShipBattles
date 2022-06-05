@@ -15,12 +15,13 @@ import {Ship} from "./ship";
 import {GameSettings} from "./game-settings";
 import {GameStates} from "./game-states";
 import {Subject} from "rxjs";
+import {DeployingService} from "../interface/deploying.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  constructor() {
+  constructor(private deployingService: DeployingService) {
     this._gameState.next(GameStates.INITIALIZATION)
   }
 
@@ -68,6 +69,12 @@ export class GameService {
 
   }
 
+  onShipMove() {
+    this.deployingService.shipMove.subscribe((e) => {
+      this.currentPlayer.moveShip(e);
+    })
+  }
+
   isShipSink(ship: Ship) {
     return this._waitingPlayer.board.getFields(ship.positions).every((field) => {
       return field.state === FieldState.HITEDSHIP;
@@ -110,11 +117,23 @@ export class GameService {
   }
 
   init(settings: GameSettings) {
-
     this.currentPlayer = new Player(settings.player1.name, settings.board, settings.ships);
     this._waitingPlayer = new Player(settings.player2.name, settings.board, settings.ships);
-    console.log('initialization', this.currentPlayer, settings);
+    this.onDeploying();
+  }
 
+  switchPlayers() {
+    const tmp = this.currentPlayer;
+    this.currentPlayer = this._waitingPlayer;
+    this._waitingPlayer = tmp;
+  }
 
+  onDeploying() {
+    this.gameState.subscribe(state => {
+      if (state === GameStates.DEPLOYING) {
+        this.currentPlayer = this._waitingPlayer;
+        this.switchPlayers();
+      }
+    })
   }
 }

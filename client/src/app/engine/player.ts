@@ -1,7 +1,7 @@
 import {Board} from "./board";
 import {Ship} from "./ship";
-import {Directions} from "./directions";
 import {Position} from "./position";
+import {ShipSettings} from "./ship-settings";
 
 export class Player {
   private _isDeployed: boolean = false;
@@ -9,7 +9,7 @@ export class Player {
   constructor(name: string = '', board: { width: number, high: number } = {
     width: 0,
     high: 0
-  }, ships: Array<{ size: number, position: Position, directions: Directions }> = []) {
+  }, ships: Array<ShipSettings> = []) {
 
     this._name = name;
     this._board = new Board(board.width, board.high);
@@ -47,17 +47,27 @@ export class Player {
     this._canMove = value;
   }
 
-  setShips(ships: Array<{ size: number, position: Position, directions: Directions }>): Array<Ship> {
+  setShips(ships: Array<ShipSettings>): Array<Ship> {
     let _ships: Array<Ship> = []
     for (let ship of ships) {
-      let _ship = new Ship(ship.size);
-      _ship.setShipPosition(ship.position, ship.directions)
-      _ships.push(_ship);
+      _ships.push(new Ship(ship));
     }
     return _ships;
   }
 
+  moveShip({id, position}: { id: number, position: Position }) {
+    let shipsSettings: Array<ShipSettings> = [];
+    for (const ship of this._ships) {
+      if (ship.id === id) ship.positions[0] = position;
+      shipsSettings.push({position: ship.positions[0], size: ship.size, directions: ship.direction})
+    }
+    this.setShips(shipsSettings);
+    //this._ships.find(ship=>ship.id===id)?.;
+    this.deployShips();
+  }
+
   deployShips() {
+
     for (const ship of this._ships) {
       this._board.deployShip(ship);
     }

@@ -7,6 +7,7 @@ import {EngineModule} from "./engine/engine.module";
 
 import {AppRoutingModule} from './app-routing.module';
 import {InterfaceModule} from "./interface/interface.module";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {InterfaceModule} from "./interface/interface.module";
     EngineModule.forRoot(),
     InterfaceModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

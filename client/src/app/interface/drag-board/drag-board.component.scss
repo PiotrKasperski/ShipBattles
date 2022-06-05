@@ -1,0 +1,20 @@
+.drag-board {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+
+}
+
+.ship-storage {
+  height: 50%;
+  width: 100%;
+
+  position: absolute;
+  bottom: -50%;
+
+}
+
+.ship-drag {
+  display: inline-block;
+}

@@ -172,4 +172,5 @@ describe('GameService', () => {
     expect(service.currentPlayer.ships[0].positions[1].y).toEqual(settings.ships[0].position.y + 1);
     expect(service._waitingPlayer.ships[0].positions[1].y).toEqual(settings.ships[0].position.y + 1);
   });
+
 });

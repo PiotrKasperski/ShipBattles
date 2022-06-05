@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class SettingComponent implements OnInit {
 
-  settings: GameSettings = {board: {high: 0, width: 0}, player1: {name: ""}, player2: {name: ""}, ships: []}
+  settings: GameSettings = {board: {high: 10, width: 10}, player1: {name: "p1"}, player2: {name: "p2"}, ships: []}
 
   constructor(private router: Router) {
   }
@@ -28,7 +28,6 @@ export class SettingComponent implements OnInit {
       // {size: 2, position: {x: 5, y: 0}, directions: Directions.VERTICAL}
     );
     this.router.navigateByUrl('/game', {state: settings})
-    console.log(settings);
   }
 
 }
